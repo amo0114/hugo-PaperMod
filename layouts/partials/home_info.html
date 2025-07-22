@@ -1,13 +1,33 @@
-{{- with site.Params.homeInfoParams }}
-<article class="first-entry home-info">
-    <header class="entry-header">
-        <h1>{{ .Title | markdownify }}</h1>
-    </header>
-    <div class="entry-content">
-        {{ .Content | markdownify }}
+<article class="first-entry home-info-card">
+  <div class="home-info-content" style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; width: 100%; gap: 40px;">
+    <div class="home-info-texts" style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 0; padding-top: 8px; padding-left: 4px;">
+      <h1 class="home-title" style="align-self: flex-start; margin-top: 0; margin-bottom: 0;">{{ with site.Params.homeInfoParams.Title }}{{ . | markdownify }}{{ end }}</h1>
+      <div class="home-subtitle" style="margin-top: 0; margin-bottom: 0;">{{ with site.Params.homeInfoParams.Subtitle }}{{ . | markdownify }}{{ end }}</div>
+      <div class="home-actions-row">
+        <a href="/archives/" class="btn-primary">📂 查看归档</a>
+      </div>
+      <div class="home-tags">
+        {{ range site.Params.homeInfoParams.Tags }}
+          {{ if ne . "摄影" }}<span class="tag">{{ . }}</span>{{ end }}
+        {{ end }}
+      </div>
+      <div class="home-signature">
+        <span class="home-sign-text">{{ with site.Params.homeInfoParams.Signature }}{{ . }}{{ end }}</span>
+      </div>
     </div>
-    <footer class="entry-footer">
-        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
-    </footer>
+    <div class="home-info-avatar" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="home-avatar avatar-glow">
+        <img src="{{ site.Params.homeInfoParams.Avatar | default "/favicon/web-app-manifest-192x192.png" }}" alt="Avatar" />
+      </div>
+      <div class="home-nickname">
+        {{ with site.Params.homeInfoParams.Nickname }}<span class="nickname-label">{{ . }}</span>{{ end }}
+        {{ with site.Params.homeInfoParams.Identity }}<span class="identity-label">{{ . }}</span>{{ end }}
+      </div>
+      <div class="home-motto" style="margin-top: 10px;">{{ with site.Params.homeInfoParams.Motto }}<em>“{{ . | markdownify }}”</em>{{ end }}</div>
+    </div>
+  </div>
+  <div class="home-social-bar">
+    {{ partial "social_icons.html" (dict "align" "center") }}
+  </div>
+  <div class="home-gradient-decor"></div>
 </article>
-{{- end -}}
