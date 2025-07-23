@@ -1,8 +1,13 @@
 <article class="first-entry home-info-card">
   <div class="home-info-content" style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; width: 100%; gap: 40px;">
-    <div class="home-info-texts" style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 0; padding-top: 8px; padding-left: 4px;">
-      <h1 class="home-title" style="align-self: flex-start; margin-top: 0; margin-bottom: 0;">{{ with site.Params.homeInfoParams.Title }}{{ . | markdownify }}{{ end }}</h1>
-      <div class="home-subtitle" style="margin-top: 0; margin-bottom: 0;">{{ with site.Params.homeInfoParams.Subtitle }}{{ . | markdownify }}{{ end }}</div>
+    <div class="home-info-texts" style="display: flex; flex-direction: column; align-items: flex-start; gap: 18px; margin-top: 0; padding-top: 8px; padding-left: 12px;">
+      <h1 class="home-title" style="align-self: flex-start; margin-top: 0; margin-bottom: 0;">{{ with site.Params.homeInfoParams.Title }}{{ . | markdownify }}{{ else }}Hi, 我是 MoYuan 👋{{ end }}</h1>
+      <div class="home-subtitle" style="margin-top: 0; margin-bottom: 0; color: var(--secondary); font-size: 1.15em;">
+        {{ with site.Params.homeInfoParams.Subtitle }}{{ . | markdownify }}{{ else }}
+        <span>全栈工程师 &amp; 数字花园园丁</span><br>
+        <span style="font-size: 0.98em; color: var(--tertiary);">代码写得比段子还溜，Bug 修得比头发还快。</span>
+        {{ end }}
+      </div>
       <div class="home-actions-row">
         <a href="/archives/" class="btn-primary">📂 查看归档</a>
       </div>
@@ -11,19 +16,27 @@
           {{ if ne . "摄影" }}<span class="tag">{{ . }}</span>{{ end }}
         {{ end }}
       </div>
-      <div class="home-signature">
-        <span class="home-sign-text">{{ with site.Params.homeInfoParams.Signature }}{{ . }}{{ end }}</span>
+      <div class="home-signature" style="font-size: 1.08em; color: var(--primary);">
+        <span class="home-sign-text">
+          {{ with site.Params.homeInfoParams.Signature }}{{ . }}{{ else }}
+          <span>“用代码种花，愿世界多一点美好。”</span>
+          {{ end }}
+        </span>
       </div>
     </div>
     <div class="home-info-avatar" style="display: flex; flex-direction: column; align-items: center;">
-      <div class="home-avatar avatar-glow">
+      <div class="home-avatar">
+        <!-- Apple 风格柔和光圈，独立 glow 元素，尺寸略大于头像，居中环绕 -->
+        <span class="avatar-glow"></span>
         <img src="{{ site.Params.homeInfoParams.Avatar | default "/favicon/web-app-manifest-192x192.png" }}" alt="Avatar" />
       </div>
       <div class="home-nickname">
-        {{ with site.Params.homeInfoParams.Nickname }}<span class="nickname-label">{{ . }}</span>{{ end }}
-        {{ with site.Params.homeInfoParams.Identity }}<span class="identity-label">{{ . }}</span>{{ end }}
+        {{ with site.Params.homeInfoParams.Nickname }}<span class="nickname-label gold-glow" style="font-family: 'Satisfy', 'Dancing Script', 'Caveat', 'Pacifico', 'Montserrat', 'Segoe UI', 'Arial Rounded MT Bold', 'Arial', 'sans-serif'; font-size: 1.5em; font-style: italic;">{{ . }}</span>{{ else }}<span class="nickname-label gold-glow" style="font-family: 'Satisfy', 'Dancing Script', 'Caveat', 'Pacifico', 'Montserrat', 'Segoe UI', 'Arial Rounded MT Bold', 'Arial', 'sans-serif'; font-size: 1.5em; font-style: italic;">Mo Yuan</span>{{ end }}
+        {{ with site.Params.homeInfoParams.Identity }}<span class="identity-label">{{ . }}</span>{{ else }}<span class="identity-label">CV工程师</span>{{ end }}
       </div>
-      <div class="home-motto" style="margin-top: 10px;">{{ with site.Params.homeInfoParams.Motto }}<em>“{{ . | markdownify }}”</em>{{ end }}</div>
+      <div class="home-motto" style="margin-top: 6px; font-size: 1.13em; color: #666; font-style: italic; font-weight: 500; max-width: 320px; background: none; box-shadow: none; border-radius: 0; padding: 0; line-height: 1.6;">
+        {{ with site.Params.homeInfoParams.Motto }}“{{ . | markdownify }}”{{ else }}“人生苦短，代码要甜。”{{ end }}
+      </div>
     </div>
   </div>
   <div class="home-social-bar">
